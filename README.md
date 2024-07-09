@@ -6,7 +6,3 @@ I am a System Administrator who is extremely interested in Cybersecurity and als
 Here, I will be posting CTF walkthroughs, Code/Scripts (found on my github), Malware Reversing, Certification Notes/Guides, and anything else that I find interesting. 
 
 Welcome!
-
-## Contact:
-
-feel free to email me here: willanalyze@proton.me
