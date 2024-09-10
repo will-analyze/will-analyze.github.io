@@ -18,4 +18,4 @@ Here, I will be posting CTF walkthroughs, Code/Scripts (found on my github), Mal
 Welcome!
 
 
-![Logo](assets/img/willanalyze_icon_white_bg.png "logo")
+![Logo](/assets/img/willanalyze_icon_white_bg.png "logo")
