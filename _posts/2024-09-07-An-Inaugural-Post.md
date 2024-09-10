@@ -18,4 +18,4 @@ Here, I will be posting CTF walkthroughs, Code/Scripts (found on my github), Mal
 Welcome!
 
 
-![Crepe](assets/img/willanalyze_icon_white_bg.png)
+![Alt text](assets/img/willanalyze_icon_white_bg.png "logo")
