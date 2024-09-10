@@ -1,4 +1,4 @@
-###########################################################
+ops###########################################################
 ### Welcome to Beautiful Jekyll!
 ### This config file is meant for settings that affect your entire website. When you first
 ### set up your website you should go through all these settings and edit them, but after
@@ -22,8 +22,7 @@ author: Will, Analyze
 navbar-links:
   About Me: "aboutme"
   Resources:
-    - Beautiful Jekyll: "https://beautifuljekyll.com"
-    - Learn markdown: "https://www.markdowntutorial.com/"
+    - CyberOps Associate Guide: "https://willanalyze.com/cbrops_assoc_guide_main"
 
 ################
 # --- Logo --- #
