@@ -4,7 +4,7 @@ title: HackTheBox PermX WalkThrough
 subtitle: a guide on how to get user and root flags on PermX
 gh-repo: will-analyze/will-analyze.github.io 
 gh-badge: [star, fork, follow]
-tags: [start]
+tags: [hackthebox]
 comments: true
 mathjax: true
 author: Will
