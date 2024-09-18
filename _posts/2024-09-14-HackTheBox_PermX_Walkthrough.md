@@ -244,7 +244,7 @@ first I want to know which user we are and what users are on here:
 
 here are the commands I put in and what they are doing (source: https://phoenixnap.com/kb/how-to-list-users-linux)
 
-**grep -E '^UID_MIN|^UID_MAX' /etc/login.defs** this gives me the minimum and maximum UID of normal (non-system) users, here we learn that the min is 1000 and the max is 6000
+**grep -E '^UID_MIN\|^UID_MAX' /etc/login.defs** this gives me the minimum and maximum UID of normal (non-system) users, here we learn that the min is 1000 and the max is 6000
 
 **getent passwd {1000..6000}** here I am going to get all users in the /etc/passwd with UIDs in the normal user range, here we establish that the only normal user is "mtz"
 
