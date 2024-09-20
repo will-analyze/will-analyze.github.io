@@ -7,8 +7,6 @@ share-img: /assets/img/01_cyberops_associate_300-2696517745.png
 tags: [cisco, cyberops, associate, certificate, cert, guide, security, monitoring]
 author: Will
 ---
-# 2.0 Security Monitoring
-
 ## 2.1 Compare attack surface and vulnerability
 - vulnerability: individual threat within an org
 - attack surface: a summary of the org's vulnerabilities on the whole
