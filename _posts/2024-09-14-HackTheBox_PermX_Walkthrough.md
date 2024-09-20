@@ -2,9 +2,11 @@
 layout: post
 title: HackTheBox PermX WalkThrough
 subtitle: a guide on how to get user and root flags on PermX
+thumbnail-img: /assets/img/htb_permx/Pasted_image_20240916211218.png
+share-img: /assets/img/htb_permx/Pasted_image_20240916211218.png
 gh-repo: will-analyze/will-analyze.github.io 
 gh-badge: [star, fork, follow]
-tags: [hackthebox]
+tags: [hackthebox,permx,red-team,privilege-escalation,dns-fuzzing]
 comments: true
 mathjax: true
 author: Will
