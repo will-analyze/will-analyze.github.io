@@ -2,6 +2,8 @@
 layout: post
 title: An Inaugural Post 
 subtitle: Welcome!
+thumbnail-img: /assets/img/willanalyze_icon_white_bg.png 
+share-img: /assets/img/willanalyze_icon_white_bg.png 
 gh-repo: will-analyze/will-analyze.github.io 
 gh-badge: [star, fork, follow]
 tags: [start]
