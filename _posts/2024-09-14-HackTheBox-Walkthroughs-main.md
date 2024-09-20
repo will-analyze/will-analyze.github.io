@@ -3,8 +3,6 @@ layout: post
 title: HackTheBox Walkthroughs
 subtitle: Walkthroughs for HackTheBox Labs
 cover-img: /assets/img/hackthebox_header.png
-thumbnail-img: /assets/img/hackthebox_logo.png
-share-img: /assets/img/hackthebox_logo.png
 tags: [hackthebox,ctf,red-team]
 author: Will
 ---
