@@ -1,3 +1,12 @@
+---
+layout: post
+title: CyberOps Associate Guide (1.0 Security Concepts)
+subtitle: Based on "Cisco CyberOps Associate CBROPS 200-201 Official Cert Guide" by Omar Santos
+thumbnail-img: /assets/img/01_cyberops_associate_300-2696517745.png
+share-img: /assets/img/01_cyberops_associate_300-2696517745.png
+tags: [cisco, cisco cyberops associate, certificate, cert, guide]
+author: Will
+---
 # 1.0 Security Concepts
 
 from: "Cisco CyberOps Associate CBROPS 200-201 Official Cert Guide" by Omar Santos
