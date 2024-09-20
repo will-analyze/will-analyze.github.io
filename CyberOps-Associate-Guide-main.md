@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: CyberOps Associate Guide Main Page
 thumbnail-img: /assets/img/01_cyberops_associate_300-2696517745.png
 share-img: /assets/img/01_cyberops_associate_300-2696517745.png
