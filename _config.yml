@@ -22,8 +22,8 @@ author: Will, Analyze
 navbar-links:
   About Me: "aboutme"
   Resources:
-    - CyberOps Associate Guide: [CyberOps Associate Guide](_posts/cbrops-assoc-guide-main.md)
-    - HacktheBox Walkthroughs: "https://willanalyze.com/HackTheBox-Walkthroughs-main/"
+    - CyberOps Associate Guide: "https://willanalyze.com/2024-09-14-CyberOps-Associate-Guide-main"
+    - HacktheBox Walkthroughs: "https://willanalyze.com/2024-09-14-HackTheBox-Walkthroughs-main/"
 
 ################
 # --- Logo --- #
