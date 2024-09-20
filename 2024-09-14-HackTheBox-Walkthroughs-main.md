@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: HackTheBox Walkthroughs
 subtitle: Walkthroughs for HackTheBox Labs
 cover-img: /assets/img/hackthebox_header.png
