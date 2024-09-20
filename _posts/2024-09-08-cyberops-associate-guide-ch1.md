@@ -7,9 +7,6 @@ share-img: /assets/img/01_cyberops_associate_300-2696517745.png
 tags: [cisco, cyberops, associate, certificate, cert, guide, security, concepts]
 author: Will
 ---
-# 1.0 Security Concepts
-
-from: "Cisco CyberOps Associate CBROPS 200-201 Official Cert Guide" by Omar Santos
 ## 1.1 Describe the CIA triad
 - **C**onfidentiality
 	- ISO 27000: “confidentiality is the property that information is not made available or disclosed to unauthorized individuals, entities, or processes.”
