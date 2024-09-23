@@ -1,4 +1,4 @@
-HacktheBox Support reached out to me and asked to take this walkthrough down as the box is not retired yet as per their policy. 
+HackTheBox Support reached out to me and asked to take this walkthrough down as the box is not retired yet as per their policy. 
 
 I apologize for any inconvenience to both any readers and to the HTB team as well.
 
