@@ -19,7 +19,7 @@ image source: https://labs.hackthebox.com/storage/avatars/3ec233f1bf70b096a66f8a
 
 ## ***Warning: This tutorial is for educational purposes only. Do not try any techniques discussed here on systems you do not own or without explicit permission from the owner.***
 
-Hello!  I am going to go over how I solved the HTB challenge "PermHTB". This challenge mainly goes over red-team fundamentals like port scanning, DNS fuzzing, getting a reverse shell, searching through config files, and linux privilege escalation. 
+Hello!  I am going to go over how I solved the HTB challenge "PermX". This challenge mainly goes over red-team fundamentals like port scanning, DNS fuzzing, getting a reverse shell, searching through config files, and linux privilege escalation. 
 
 Let's get started:
 ### Connecting to the Lab:
