@@ -1,10 +1,10 @@
 ---
 layout: post
 title: HackTheBox Sau WalkThrough
-subtitle: How to get user and root flags on Sau box
-thumbnail-img: /assets/img/htb_permx/1ea2980b9dc2d11cf6a3f82f10ba8702.webp
-share-img: /assets/img/htb_permx/1ea2980b9dc2d11cf6a3f82f10ba8702.webp
-tags: [cisco, cyberops, associate, certificate, cert, guide, security, concepts]
+subtitle: How to get user and root flags on the HTB lab Sau
+thumbnail-img: /assets/img/htb_sau/1ea2980b9dc2d11cf6a3f82f10ba8702.webp
+share-img: /assets/img/htb_sau/1ea2980b9dc2d11cf6a3f82f10ba8702.webp
+tags: [hackthebox,htb,sau,red-team,linux,privilege-escalation,security,walkthrough]
 author: Will
 ---
 
@@ -59,9 +59,7 @@ since we seem to be getting the most data from that 55555 port, I am going to tr
 
 ![](/assets/img/htb_sau/Screenshot_From_2024-09-2321-46-19.png)
 
-here we see some sort of software that allows us make baskets called "request-baskets" on the bottom of the page running version 1.2.1. This is already interesting as this gives us a specific software/version that can have a CVE associated with it. Before I do that though
-
-I'm going to go ahead and make a basket and see how it works:
+here we see some sort of software that allows us make baskets called "request-baskets" on the bottom of the page running version 1.2.1. This is already interesting as this gives us a specific software/version that can have a CVE associated with it. Before I do that though, I'm going to go ahead and make a basket and see how it works:
 
 ![](/assets/img/htb_sau/Screenshot_From_2024-09-23_21-52-28.png)
 
