@@ -72,7 +72,7 @@ author: Will
 - five main event types: error, warning, information, success audit, failure audit
 - typically in c:\windows\system32\config
 ## Linux:
-### ### Process:
+### Process:
 - program system is running
 - starts with one thread (primary thread) and spins up more as necessary
 - Linux: different types of processes:
