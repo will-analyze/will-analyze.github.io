@@ -14,7 +14,7 @@ image source: https://labs.hackthebox.com/storage/avatars/1ea2980b9dc2d11cf6a3f8
 
 ## ***Warning: This tutorial is for educational purposes only. Do not try any techniques discussed here on systems you do not own or without explicit permission from the owner.***
 
-Hello!  I am going to go over how I solved the HTB challenge "Sau". This challenge mainly goes over red-team fundamentals like port scanning, api hacking, getting a reverse shell, searching through config files, and linux privilege escalation. 
+Hello!  I am going to go over how I solved the HTB challenge "Sau". This challenge mainly goes over red-team fundamentals like port scanning, api hacking, getting a reverse shell, and linux privilege escalation. 
 
 Let's get started:
 ### Connecting to the Lab:
