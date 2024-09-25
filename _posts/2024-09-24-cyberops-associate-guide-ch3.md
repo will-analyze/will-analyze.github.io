@@ -77,7 +77,8 @@ author: Will
 - starts with one thread (primary thread) and spins up more as necessary
 - Linux: different types of processes:
 	- **child:** all processes are child processes to a parent process. Except for the init process (PID 1)
-	- **init:** short for initialization, kernel starts init process to create/take down the user space. If kernel can't find init process, this is called kernel panic ![[Pasted image 20240623203325.png]]
+	- **init:** short for initialization, kernel starts init process to create/take down the user space. If kernel can't find init process, this is called kernel panic 
+![](/assets/img/htb_sau/init-process-1024x710.webp)
 		- source: https://linuxtldr.com/init-linux/
 	- **orphan:** when parent process is terminated and child process continues
 	- **zombie:** process that releases its associated memory/resources, stays in entry table
