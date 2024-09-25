@@ -12,4 +12,6 @@ author: Will
 
 ## [2.0 Security Monitoring](https://willanalyze.com/2024-09-09-cyberops-associate-guide-ch2/)
 
+## [3.0 Host-Based Analysis](https://willanalyze.com/2024-09-24-cyberops-associate-guide-ch3/)
+
 ![Logo](/assets/img/01_cyberops_associate_300-2696517745.png)
