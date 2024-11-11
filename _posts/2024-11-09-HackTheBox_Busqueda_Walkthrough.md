@@ -189,11 +189,7 @@ looks like we now have revshell as a user named svc:
 
 ### Command and Control
 
-it seems as though we already have a normal user, so let's navigate to the home directory and see if we can find anything:
-
-![](/assets/img/htb_busqueda/Screenshot_From_2024-09-24_01-20-54.png)
-
-we then can see a file named user.txt and that seems to be the user flag!
+it seems as though we already have a normal user, and if we navigate to the home directory we should see user.txt which contains our user flag.
 
 I recommend a break here as we just did quite a bit.
 
