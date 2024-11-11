@@ -13,7 +13,7 @@ image source: https://labs.hackthebox.com/storage/avatars/a6942ab57b6a79f7124042
 
 ## ***Warning: This tutorial is for educational purposes only. Do not try any techniques discussed here on systems you do not own or without explicit permission from the owner.***
 
-Hello!  I am going to go over how I solved the HTB challenge "Busqueda". This challenge mainly goes over red-team fundamentals like port scanning, exploit development, getting a reverse shell, searching through config files, and linux privilege escalation. 
+Hello!  I am going to go over how I solved the HTB challenge "Busqueda". This challenge mainly goes over red-team fundamentals like port scanning, exploit development, getting a reverse shell, and linux privilege escalation. 
 
 Let's get started:
 ### Connecting to the Lab:
