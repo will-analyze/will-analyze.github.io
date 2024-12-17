@@ -14,3 +14,6 @@ author: Will
 
 ## Busqueda Walkthrough:
 [<img src="/assets/img/htb_busqueda/busqueda_icon.png">](https://willanalyze.com/2024-11-09-HackTheBox_Busqueda_Walkthrough/)
+
+## Support Walkthrough:
+[<img src="/assets/img/htb_support/htb_support.webp">](https://willanalyze.com/2024-12-15-HackTheBox_Support_Walkthrough/)
