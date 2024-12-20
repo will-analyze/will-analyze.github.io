@@ -30,6 +30,7 @@ sudo openvpn lab_willanalyze.ovpn
 ```
 
 This will initiate a giant wall of text that details your connection. As long as you see the words "Initialization Sequence Completed" in that wall, you should be good to go!
+
 ![](/assets/img/htb_permx/Screenshot_from_2024-09-10_23-46-44.png)
 
 ### Reconnaissance and Data Gathering:
@@ -52,6 +53,7 @@ To recap what this command means:
 **-sC** tells nmap to run a list of default scripts against the host to check things like supported ciphers, http headers, ssh-hostkeys, etc.
 
 Here is what I got:
+
 ![](/assets/img/htb_permx/Screenshot_from_2024-09-16_21-27-39.png)
 
 Two main ports open: port 22 running ssh and port 80 running http (specifically a php app).
@@ -100,9 +102,11 @@ ffuf -u http://permx.htb//FUZZ -w /usr/share/wordlists/dirb/common.txt  -mc 200,
 both scans seem to have turned up something
 
 subdomain:
+
 ![](/assets/img/htb_permx/Screenshot_from_2024-09-16_21-57-15.png)
 
 directory:
+
 ![](/assets/img/htb_permx/Screenshot_from_2024-09-16_21-50-12.png)
 
 The main results that seem interesting to me are "lms.permx.htb" and ".htpasswd"
@@ -163,6 +167,7 @@ to break down this input:
 	**-p**: indicates that we will be specifying the port number. I did 8080, but you can chose any valid port number not currently in use
 **8080**: the port number we are using
 **-s**: local source address, insert your IP that HTB assigned your machine via VPN. You can either find it through the command line with commands like **ifconfig**, **ip address**, or you can just find it in your machine connection:
+
 ![](/assets/img/htb_permx/Screenshot_from_2024-09-16_23-57-02.png)
 
 **heads up: you may need root permissions to open up a port, in which case just put a "sudo" at the beginning**
@@ -216,6 +221,7 @@ now time for the actual reverse shell:
 I just kept the first two as default, then put in the info you input in your netcat info
 
 now we have a reverse shell!
+
 ![](/assets/img/htb_permx/Screenshot_from_2024-09-16_23-59-35.png)
 
 going through the exploit script, it seems to be using a classic bash one liner to establish the reverse shell:
