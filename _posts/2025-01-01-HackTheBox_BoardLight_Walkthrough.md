@@ -2,15 +2,15 @@
 layout: post
 title: HackTheBox Boardlight WalkThrough
 subtitle: How to get user and root flags on the HTB lab ServMon
-thumbnail-img: /assets/img/htb_permx/Pasted_image_20240916211218.png
-share-img: /assets/img/htb_permx/Pasted_image_20240916211218.png
+thumbnail-img: assets/img/htb_boardlight/htb_boardlight.png
+share-img: assets/img/htb_boardlight/htb_boardlight.png
 tags: [hackthebox,htb,boardlight,red-team,linux,privilege-escalation,dns-fuzzing,security,walkthrough,python]
 author: Will
 ---
 
 # HackTheBox Boardlight
 
-![](assets/img/htb_boardlight/7768afed979c9abe917b0c20df49ceb8.webp)
+![](assets/img/htb_boardlight/htb_boardlight.png)
 
 image source: https://labs.hackthebox.com/storage/avatars/7768afed979c9abe917b0c20df49ceb8.png
 
