@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HackTheBox Boardlight WalkThrough
-subtitle: How to get user and root flags on the HTB lab ServMon
+subtitle: How to get user and root flags on the HTB lab BoardLight
 thumbnail-img: assets/img/htb_boardlight/htb_boardlight.png
 share-img: assets/img/htb_boardlight/htb_boardlight.png
 tags: [hackthebox,htb,boardlight,red-team,linux,privilege-escalation,dns-fuzzing,security,walkthrough,python]
@@ -10,7 +10,7 @@ author: Will
 
 # HackTheBox Boardlight
 
-![](assets/img/htb_boardlight/htb_boardlight.png)
+![](/assets/img/htb_boardlight/htb_boardlight.png)
 
 image source: https://labs.hackthebox.com/storage/avatars/7768afed979c9abe917b0c20df49ceb8.png
 
@@ -51,7 +51,7 @@ To recap what this command means:
 
 Here is what I got:
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-10-38.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-10-38.png)
 
 Two main ports open: port 22 running ssh and port 80 running http (specifically an app running on an ubuntu server with apache).
 
@@ -63,7 +63,7 @@ clicking around the site, it looks like a cybersecurity firm, let's see how it h
 
 Nothing much on the site yet it seems. Something I did notice was an email on the bottom of the homepage:
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-28-16.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-28-16.png)
 
 this seems to be their domain, let's try to use it and see what happens:
 #### /etc/hosts
@@ -96,14 +96,14 @@ ffuf -u http://board.htb/ -H "Host: FUZZ.board.htb" -w /usr/share/SecLists/Disco
 
 upon our initial scan, we will see a *bunch* of 200 codes. Good news, right? However if you go through and access any of them, there's nothing. It seems like there are a bunch of empty domains that we have to filter out.
 
-![](assets/img/htb_boardlight/Screenshot_from_2024-09-23_02-22-58.png)
+![](/assets/img/htb_boardlight/Screenshot_from_2024-09-23_02-22-58.png)
 
 luckily, ffuf has a method to filter these domains based on size. I will now only include domains larger than the size for the empty domains: 15949
 
 ``` bash
 ffuf -u http://board.htb/ -H "Host: FUZZ.board.htb" -w /usr/share/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -c -fs 15949
 ```
-![](assets/img/htb_boardlight/Screenshot_from_2024-09-23_02-21-00.png)
+![](/assets/img/htb_boardlight/Screenshot_from_2024-09-23_02-21-00.png)
 
 Looks like we got an actual domain! crm.board.htb
 
@@ -115,17 +115,17 @@ directory scan command:
 ffuf -u http://board.htb/FUZZ -w /usr/share/wordlists/dirb/common.txt 
 ```
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-34-09.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-34-09.png)
 
 this seems to have some pretty standard apache server directories. While interesting, I am going to prioritize the crm.board.htb directory and see what that has.
 
 to do this, make sure to add the crm subdomain to the hosts file:
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-39-39.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-39-39.png)
 
 ok now we navigate to the crm page we find that they use something called Dolibarr (version 17.0.0):
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-45-56.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_00-45-56.png)
 
 for giggles I decided to try some known default passwords like "admin:password" and "admin:admin". Sure enough, admin:admin worked! (you'd expect a bit more from a security company)
 
@@ -238,7 +238,7 @@ to break down this input:
 **8080**: the port number we are using
 **-s**: local source address, insert your IP that HTB assigned your machine via VPN. You can either find it through the command line with commands like **ifconfig**, **ip address**, or you can just find it in your machine connection:
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_01-48-18.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_01-48-18.png)
 
 after establishing the netcat session, now I run the following command:
 
@@ -250,7 +250,7 @@ and we're in! it looks like we have landed using the www-data user like we did w
 
 ### Exploit/Installation
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_01-55-29.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_01-55-29.png)
 
 I'm going to use some similar techniques to last time:
 
@@ -258,7 +258,7 @@ I'm going to use some similar techniques to last time:
 
 **getent passwd {1000..6000}** here I am going to get all users in the /etc/passwd with UIDs in the normal user range, here we establish that the only normal user is "larissa"
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-02-03.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-02-03.png)
 
 From here, we are going to try and find some "low hanging fruit" so we can find some credentials.
 
@@ -274,11 +274,11 @@ we get a bunch of "permission denied" messages but we eventually see
 
 **/var/www/html/crm.board.htb/htdocs/conf**
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-18-39.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-18-39.png)
 
 let's change to that directory:
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-22-50.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-22-50.png)
 
 now let's cat and grep conf.php for "pass":
 
@@ -294,7 +294,7 @@ and now we have a password: serverfun2$2023!!
 
 let's try sshing in with the larissa user and see if the password works:
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-30-25.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-30-25.png)
 
 we're in! we now have a foothold in the system. with a quick 
 
@@ -319,7 +319,7 @@ we get a bunch of system files and directories which aren't surprising.
 
 That is except for some directories called "enlightenment":
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-55-53.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_02-55-53.png)
 
 I went ahead and copy and pasted one of these into duckduckgo and found a github page containing an exploit for **CVE-2022-37706**:
 
@@ -373,7 +373,7 @@ scp exploit.sh larissa@board.htb:/home/larissa
 
 now we go back to our ssh session and run the exploit:
 
-![](assets/img/htb_boardlight/Screenshot_From_2024-09-23_03-16-21.png)
+![](/assets/img/htb_boardlight/Screenshot_From_2024-09-23_03-16-21.png)
 
 now navigate to /root and open up root.txt to get the flag.
 
