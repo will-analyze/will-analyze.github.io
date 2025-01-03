@@ -23,4 +23,4 @@ author: Will
 [<img src="/assets/img/htb_support/htb_support.webp">](https://willanalyze.com/2024-12-15-HackTheBox_Support_Walkthrough/)
 
 ## Boardlight Walkthrough:
-[<img serc="assets/img/htb_boardlight/htb_boardlight.png">](https://willanalyze.com/2025-01-01-HackTheBox_BoardLight_Walkthrough/)
+[<img serc="/assets/img/htb_boardlight/htb_boardlight.png">](https://willanalyze.com/2025-01-01-HackTheBox_BoardLight_Walkthrough/)
