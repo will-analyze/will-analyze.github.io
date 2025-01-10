@@ -2,8 +2,8 @@
 layout: post
 title: HackTheBox Help WalkThrough
 subtitle: How to get user and root flags on the HTB lab Help
-thumbnail-img: assets/img/htb_boardlight/htb_boardlight.png
-share-img: assets/img/htb_boardlight/htb_boardlight.png
+thumbnail-img: /assets/img/htb_help/Pasted_image_20241230204338.png
+share-img: /assets/img/htb_help/Pasted_image_20241230204338.png
 tags: [hackthebox,htb,help,red-team,linux,privilege-escalation,dns-fuzzing,security,walkthrough,python]
 author: Will
 ---
